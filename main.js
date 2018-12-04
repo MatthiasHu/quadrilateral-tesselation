@@ -56,6 +56,7 @@ function draw() {
 
   // tessellation
   ctx.strokeStyle = "#000";
+  ctx.fillStyle = "#f3f3f3";
   var n = 20;
   var d1 =
     [ handles[2][0] - handles[0][0]
@@ -74,10 +75,14 @@ function draw() {
       var a3 = plus(d, handles[2]);
       var a4 = plus(d, handles[3]);
 
-      strokeLine(a1, a2);
-      strokeLine(a2, a3);
-      strokeLine(a3, a4);
-      strokeLine(a4, a1);
+      ctx.beginPath();
+      ctx.moveTo(a1[0], a1[1]);
+      ctx.lineTo(a2[0], a2[1]);
+      ctx.lineTo(a3[0], a3[1]);
+      ctx.lineTo(a4[0], a4[1]);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
     }
   }
 
@@ -93,13 +98,6 @@ function draw() {
 
 function plus(v, w) {
   return [v[0]+w[0], v[1]+w[1]];
-}
-
-function strokeLine(a, b) {
-  ctx.beginPath();
-  ctx.moveTo(a[0], a[1]);
-  ctx.lineTo(b[0], b[1]);
-  ctx.stroke();
 }
 
 function dist(a, b) {
